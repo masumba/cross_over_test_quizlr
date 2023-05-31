@@ -1,4 +1,4 @@
-# cross_over_test_quizlr
+# CrossOver Test Quizlr
 
 A new Flutter project.
 
