@@ -1,5 +1,7 @@
 import 'package:cross_over_test_quizlr/utils/screen_util.dart';
 import 'package:cross_over_test_quizlr/views/home/tabs/home/home_tab_view_model.dart';
+import 'package:cross_over_test_quizlr/views/home/tabs/home/tabs/following_tab.dart';
+import 'package:cross_over_test_quizlr/views/home/tabs/home/tabs/for_you_tab.dart';
 import 'package:cross_over_test_quizlr/widgets/app/app_container.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -82,8 +84,8 @@ class _HomeTabViewState extends State<HomeTabView> {
           ),
           body: const TabBarView(
             children: [
-              Icon(Icons.directions_car),
-              Icon(Icons.directions_transit),
+              FollowingTab(),
+              ForYouTab(),
             ],
           ),
           persistentFooterButtons: [
