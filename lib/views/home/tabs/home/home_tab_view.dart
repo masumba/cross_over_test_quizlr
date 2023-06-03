@@ -17,8 +17,39 @@ class _HomeTabViewState extends State<HomeTabView> {
       disposeViewModel: false,
       onViewModelReady: (model) => model.init(),
       viewModelBuilder: () => HomeTabViewModel(),
-      builder: (context, model, child) => Placeholder(
-        color: Colors.blue,
+      builder: (context, model, child) => DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Material(
+              color: Theme.of(context).appBarTheme.backgroundColor,
+              child: SafeArea(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(child: Container()),
+                    const TabBar(
+                      tabs: [
+                        Tab(
+                          icon: Text('Following'),
+                        ),
+                        Tab(
+                          icon: Text('For You'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          body: const TabBarView(
+            children: [
+              Icon(Icons.directions_car),
+              Icon(Icons.directions_transit),
+            ],
+          ),
+        ),
       ),
     );
   }
