@@ -8,6 +8,8 @@ class StartUpViewModel extends AppBaseViewModel {
       await getAppVersion();
       appVersionNumber = 'Version: $appVersion';
       notifyListeners();
+
+      navigateToHomeView();
     } catch (e, s) {
       showLoader = false;
       notifyListeners();

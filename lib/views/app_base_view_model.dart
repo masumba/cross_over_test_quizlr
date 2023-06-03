@@ -1,3 +1,4 @@
+import 'package:cross_over_test_quizlr/constants/app_route.dart';
 import 'package:cross_over_test_quizlr/service_locator.dart';
 import 'package:cross_over_test_quizlr/services/navigation_service.dart';
 import 'package:cross_over_test_quizlr/services/package_info_service.dart';
@@ -15,5 +16,9 @@ class AppBaseViewModel extends ChangeNotifier {
     appVersion =
         '${_packageInfoService.appVersion}.${_packageInfoService.buildVersion}';
     notifyListeners();
+  }
+
+  Future<void> navigateToHomeView() async {
+    _navigationService.navigateToWithNoBack(AppRoute.homeViewRoute);
   }
 }

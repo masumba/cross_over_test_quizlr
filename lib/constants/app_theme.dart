@@ -31,6 +31,11 @@ class AppTheme {
         ),
         centerTitle: true,
       ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.black,
+        unselectedItemColor: Colors.grey.shade600,
+        selectedItemColor: Colors.white,
+      ),
     );
   }
 }
