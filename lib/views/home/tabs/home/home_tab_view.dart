@@ -90,7 +90,7 @@ class _HomeTabViewState extends State<HomeTabView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 Expanded(
                   flex: 1,
                   child: Icon(Icons.video_collection),
