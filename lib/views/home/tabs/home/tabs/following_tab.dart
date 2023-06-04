@@ -1,3 +1,4 @@
+import 'package:cross_over_test_quizlr/widgets/icon_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -25,33 +26,51 @@ class _FollowingTabState extends State<FollowingTab> {
         ),
         Positioned(
           right: 8,
-          top: MediaQuery.of(context).size.height * 0.35,
+          top: MediaQuery.of(context).size.height * 0.28,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(
+              IconTextButton(
                 icon: const FaIcon(FontAwesomeIcons.scroll),
+                color: Colors.amber.withOpacity(0.4),
+                borderColor: Colors.white,
                 onPressed: () {},
               ),
-              IconButton(
+              IconTextButton(
                 icon: const FaIcon(FontAwesomeIcons.solidHeart),
-                onPressed: () {},
+                label: const Text('87'),
+                onPressed: () {
+                  // Handle trailing button press
+                },
               ),
-              IconButton(
+              IconTextButton(
                 icon: const FaIcon(FontAwesomeIcons.solidCommentDots),
-                onPressed: () {},
+                label: const Text('2'),
+                onPressed: () {
+                  // Handle trailing button press
+                },
               ),
-              IconButton(
+              IconTextButton(
                 icon: const FaIcon(FontAwesomeIcons.share),
-                onPressed: () {},
+                label: const Text('17'),
+                onPressed: () {
+                  // Handle trailing button press
+                },
               ),
-              IconButton(
+              IconTextButton(
                 icon: const Icon(Icons.bookmark),
-                onPressed: () {},
+                label: const Text('203'),
+                onPressed: () {
+                  // Handle trailing button press
+                },
               ),
-              IconButton(
+              IconTextButton(
                 icon: const Icon(Icons.sync),
-                onPressed: () {},
+                color: Colors.greenAccent,
+                label: const Text('Flip'),
+                onPressed: () {
+                  // Handle trailing button press
+                },
               ),
             ],
           ),
