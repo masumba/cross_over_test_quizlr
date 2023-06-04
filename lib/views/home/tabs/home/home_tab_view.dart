@@ -50,13 +50,13 @@ class _HomeTabViewState extends State<HomeTabView> {
                             ),
                           ),
                         ),
-                        const Expanded(
+                        Expanded(
                           flex: 3,
                           child: TabBar(
-                            indicatorColor: Colors.white,
-                            labelColor: Colors.white,
+                            indicatorColor: Theme.of(context).iconTheme.color,
+                            labelColor: Theme.of(context).iconTheme.color,
                             labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                            tabs: [
+                            tabs: const [
                               Tab(
                                 icon: Text('Following'),
                               ),
