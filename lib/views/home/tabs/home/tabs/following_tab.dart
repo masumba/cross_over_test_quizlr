@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FollowingTab extends StatefulWidget {
   const FollowingTab({super.key});
@@ -15,11 +16,44 @@ class _FollowingTabState extends State<FollowingTab> {
       children: [
         Center(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 20.0, 8.0),
+            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 60.0, 8.0),
             child: Text(
               'What was the name of the Act that created federal subsidies for the construction of a transcontinental railroad?',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
+          ),
+        ),
+        Positioned(
+          right: 8,
+          top: MediaQuery.of(context).size.height * 0.35,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.scroll),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.solidHeart),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.solidCommentDots),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.share),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.bookmark),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.sync),
+                onPressed: () {},
+              ),
+            ],
           ),
         ),
         Positioned(
