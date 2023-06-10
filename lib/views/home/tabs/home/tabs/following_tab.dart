@@ -28,9 +28,12 @@ class _FollowingTabState extends State<FollowingTab> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Text(
-                  'What was the name of the Act that created federal subsidies for the construction of a transcontinental railroad?',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                  child: Text(
+                    'What was the name of the Act that created federal subsidies for the construction of a transcontinental railroad?',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
               ),
               if (model.followingFlipClicked)
@@ -38,17 +41,26 @@ class _FollowingTabState extends State<FollowingTab> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ScreenUtil.spacedDivider,
-                    const Text(
-                      'Answer',
-                      style: TextStyle(color: Colors.greenAccent),
+                    ScreenUtil.spacedDividerSmall,
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(8.0, 0, 0, 8.0),
+                      child: Text(
+                        'Answer',
+                        style: TextStyle(color: Colors.greenAccent),
+                      ),
                     ),
-                    Text(
-                      'With the rapid settlement in western territories, Congress decided that an efficient railroad transport to the pacific coast would be beneficial and passed the Pacific Railway Act of 1862 during the Civil War to promote easier western transportation for the North.',
-                      style: Theme.of(context).textTheme.headlineSmall,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                      child: Text(
+                        'With the rapid settlement in western territories, Congress decided that an efficient railroad transport to the pacific coast would be beneficial and passed the Pacific Railway Act of 1862 during the Civil War to promote easier western transportation for the North.',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
                     ),
                     ScreenUtil.verticalSpaceNormal,
-                    const Text('How well did you know this?'),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                      child: Text('How well did you know this?'),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
