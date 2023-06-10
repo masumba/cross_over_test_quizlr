@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cross_over_test_quizlr/models/dto/for_you_tab_answer_dto.dart';
 import 'package:cross_over_test_quizlr/views/app_base_view_model.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,9 @@ import 'package:flutter/material.dart';
 class HomeTabViewModel extends AppBaseViewModel {
   bool followingFlipClicked = false;
   List<ForYouTabAnswerDto> forYouTabAnswers = [];
+  ForYouTabAnswerDto? selectedForYouAnswer;
+  int forYouValueKey = 1;
+  Random random = Random();
   Future<void> init() async {
     loadForYouAnswers();
   }
@@ -25,6 +30,12 @@ class HomeTabViewModel extends AppBaseViewModel {
     forYouTabAnswers.add(
       ForYouTabAnswerDto(answer: 'Homestead Act', isCorrect: false),
     );
+    notifyListeners();
+  }
+
+  void answerSelectedOnForYou({required ForYouTabAnswerDto answer}) {
+    selectedForYouAnswer = answer;
+    forYouValueKey = random.nextInt(99999);
     notifyListeners();
   }
 }

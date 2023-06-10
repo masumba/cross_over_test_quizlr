@@ -38,7 +38,13 @@ class _ForYouTabState extends State<ForYouTab> {
               ),
               ScreenUtil.verticalSpaceLarge,
               ForYouTabAnswerListBlock(
+                key: ValueKey(model.forYouValueKey),
                 answers: model.forYouTabAnswers,
+                onAnswerClick: (answer) {
+                  model.answerSelectedOnForYou(answer: answer);
+                },
+                selectedAnswer: model.selectedForYouAnswer,
+                showCorrectAnswerIfSelected: true,
               ),
             ],
           ),
