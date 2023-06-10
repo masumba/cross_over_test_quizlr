@@ -45,6 +45,7 @@ class _ForYouTabState extends State<ForYouTab> {
                 },
                 selectedAnswer: model.selectedForYouAnswer,
                 showCorrectAnswerIfSelected: true,
+                showOnlyCorrectAnswer: model.forYouFlipClicked,
               ),
             ],
           ),
@@ -93,7 +94,9 @@ class _ForYouTabState extends State<ForYouTab> {
                 icon: const Icon(Icons.sync),
                 color: Colors.greenAccent,
                 label: const Text('Flip'),
-                onPressed: () {},
+                onPressed: () {
+                  model.updateForYouFlipClicked();
+                },
               ),
             ],
           ),

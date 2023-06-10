@@ -63,12 +63,14 @@ class ForYouTabAnswerListBlock extends StatelessWidget {
   final List<ForYouTabAnswerDto> answers;
   final ForYouTabAnswerDto? selectedAnswer;
   final bool showCorrectAnswerIfSelected;
+  final bool showOnlyCorrectAnswer;
   final Function(ForYouTabAnswerDto) onAnswerClick;
   const ForYouTabAnswerListBlock({
     super.key,
     required this.answers,
     required this.onAnswerClick,
     this.selectedAnswer,
+    this.showOnlyCorrectAnswer = false,
     this.showCorrectAnswerIfSelected = false,
   });
 
@@ -82,16 +84,26 @@ class ForYouTabAnswerListBlock extends StatelessWidget {
           answer: answers[index],
           showAnswerIfCorrect:
               showIfCorrect(currentIndexIsCorrect: answers[index].isCorrect),
-          showAnswerStatus: selectedAnswer == answers[index],
+          showAnswerStatus: showAnswerStatus(answerDto: answers[index]),
           onClick: onAnswerClick,
         );
       },
     );
   }
 
+  bool showAnswerStatus({required ForYouTabAnswerDto answerDto}) {
+    if (showOnlyCorrectAnswer) {
+      return false;
+    }
+    return selectedAnswer == answerDto;
+  }
+
   bool showIfCorrect({required bool currentIndexIsCorrect}) {
     var selected = selectedAnswer;
     if (selected != null && currentIndexIsCorrect) {
+      return currentIndexIsCorrect;
+    }
+    if (showOnlyCorrectAnswer && currentIndexIsCorrect) {
       return currentIndexIsCorrect;
     }
     return false;

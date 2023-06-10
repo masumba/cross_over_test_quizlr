@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class HomeTabViewModel extends AppBaseViewModel {
   bool followingFlipClicked = false;
+  bool forYouFlipClicked = false;
   List<ForYouTabAnswerDto> forYouTabAnswers = [];
   ForYouTabAnswerDto? selectedForYouAnswer;
   int forYouValueKey = 1;
@@ -16,6 +17,15 @@ class HomeTabViewModel extends AppBaseViewModel {
 
   void updateFollowingFlipClicked() {
     followingFlipClicked = !followingFlipClicked;
+    notifyListeners();
+  }
+
+  void updateForYouFlipClicked() {
+    forYouFlipClicked = !forYouFlipClicked;
+    if (forYouFlipClicked) {
+      selectedForYouAnswer = null;
+    }
+    forYouValueKey = random.nextInt(99999);
     notifyListeners();
   }
 
