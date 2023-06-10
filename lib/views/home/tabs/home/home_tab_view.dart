@@ -55,7 +55,8 @@ class _HomeTabViewState extends State<HomeTabView> {
                           child: TabBar(
                             indicatorColor: Theme.of(context).iconTheme.color,
                             labelColor: Theme.of(context).iconTheme.color,
-                            labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                            labelStyle:
+                                const TextStyle(fontWeight: FontWeight.bold),
                             tabs: const [
                               Tab(
                                 icon: Text('Following'),

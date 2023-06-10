@@ -1,9 +1,11 @@
 import 'package:cross_over_test_quizlr/utils/screen_util.dart';
+import 'package:cross_over_test_quizlr/views/home/tabs/home/home_tab_view_model.dart';
 import 'package:cross_over_test_quizlr/widgets/busy_button.dart';
 import 'package:cross_over_test_quizlr/widgets/icon_text_button.dart';
 import 'package:cross_over_test_quizlr/widgets/tile_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:stacked/stacked.dart';
 
 class FollowingTab extends StatefulWidget {
   const FollowingTab({super.key});
@@ -15,6 +17,7 @@ class FollowingTab extends StatefulWidget {
 class _FollowingTabState extends State<FollowingTab> {
   @override
   Widget build(BuildContext context) {
+    var model = getParentViewModel<HomeTabViewModel>(context);
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -30,45 +33,52 @@ class _FollowingTabState extends State<FollowingTab> {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
-              ScreenUtil.spacedDivider,
-              const Text(
-                'Answer',
-                style: TextStyle(color: Colors.greenAccent),
-              ),
-              Text(
-                'With the rapid settlement in western territories, Congress decided that an efficient railroad transport to the pacific coast would be beneficial and passed the Pacific Railway Act of 1862 during the Civil War to promote easier western transportation for the North.',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              ScreenUtil.verticalSpaceNormal,
-              const Text('How well did you know this?'),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    TileButton(
-                      color: Colors.orange,
-                      title: '1',
+              if (model.followingFlipClicked)
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ScreenUtil.spacedDivider,
+                    const Text(
+                      'Answer',
+                      style: TextStyle(color: Colors.greenAccent),
                     ),
-                    TileButton(
-                      color: Colors.orangeAccent,
-                      title: '2',
+                    Text(
+                      'With the rapid settlement in western territories, Congress decided that an efficient railroad transport to the pacific coast would be beneficial and passed the Pacific Railway Act of 1862 during the Civil War to promote easier western transportation for the North.',
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    TileButton(
-                      color: Colors.yellow,
-                      title: '3',
-                    ),
-                    TileButton(
-                      color: Colors.green,
-                      title: '4',
-                    ),
-                    TileButton(
-                      color: Colors.lightGreen,
-                      title: '5',
-                    ),
+                    ScreenUtil.verticalSpaceNormal,
+                    const Text('How well did you know this?'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: const [
+                          TileButton(
+                            color: Colors.orange,
+                            title: '1',
+                          ),
+                          TileButton(
+                            color: Colors.orangeAccent,
+                            title: '2',
+                          ),
+                          TileButton(
+                            color: Colors.yellow,
+                            title: '3',
+                          ),
+                          TileButton(
+                            color: Colors.green,
+                            title: '4',
+                          ),
+                          TileButton(
+                            color: Colors.lightGreen,
+                            title: '5',
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              )
             ],
           ),
         ),
@@ -117,7 +127,7 @@ class _FollowingTabState extends State<FollowingTab> {
                 color: Colors.greenAccent,
                 label: const Text('Flip'),
                 onPressed: () {
-                  // Handle trailing button press
+                  model.updateFollowingFlipClicked();
                 },
               ),
             ],
