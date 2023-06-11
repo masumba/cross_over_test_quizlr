@@ -60,6 +60,11 @@ class _ForYouTabState extends State<ForYouTab> {
                 icon: const FaIcon(FontAwesomeIcons.scroll),
                 color: Colors.amber.withOpacity(0.4),
                 borderColor: Colors.white,
+                badgeIcon: const Icon(
+                  Icons.add,
+                  size: 10,
+                ),
+                badgeColor: Colors.green,
                 onPressed: () {},
               ),
               IconTextButton(

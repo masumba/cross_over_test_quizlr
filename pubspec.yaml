@@ -61,6 +61,8 @@ dependencies:
   logger: ^1.3.0
   #https://pub.dev/packages/font_awesome_flutter/install
   font_awesome_flutter: ^10.2.1
+  #https://pub.dev/packages/badges
+  badges: ^3.1.1
 
 dev_dependencies:
   flutter_test:
