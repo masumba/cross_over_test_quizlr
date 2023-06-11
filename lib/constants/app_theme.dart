@@ -11,7 +11,7 @@ class AppTheme {
           // For Android
           statusBarIconBrightness: Brightness.light,
           // For iOS.
-          statusBarBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
         ),
         centerTitle: true,
       ),
@@ -23,11 +23,17 @@ class AppTheme {
       useMaterial3: true,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.black,
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+        ),
         systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.black,
+          systemNavigationBarColor: Colors.black,
           // For Android
           statusBarIconBrightness: Brightness.dark,
           // For iOS.
-          statusBarBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
         ),
         centerTitle: true,
       ),
