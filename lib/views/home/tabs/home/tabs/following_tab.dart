@@ -1,5 +1,6 @@
 import 'package:cross_over_test_quizlr/utils/screen_util.dart';
 import 'package:cross_over_test_quizlr/views/home/tabs/home/home_tab_view_model.dart';
+import 'package:cross_over_test_quizlr/widgets/answer_knowledge_level_option_block.dart';
 import 'package:cross_over_test_quizlr/widgets/busy_button.dart';
 import 'package:cross_over_test_quizlr/widgets/icon_text_button.dart';
 import 'package:cross_over_test_quizlr/widgets/tile_button.dart';
@@ -61,34 +62,13 @@ class _FollowingTabState extends State<FollowingTab> {
                       padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                       child: Text('How well did you know this?'),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
-                          TileButton(
-                            color: Colors.orange,
-                            title: '1',
-                          ),
-                          TileButton(
-                            color: Colors.orangeAccent,
-                            title: '2',
-                          ),
-                          TileButton(
-                            color: Colors.yellow,
-                            title: '3',
-                          ),
-                          TileButton(
-                            color: Colors.green,
-                            title: '4',
-                          ),
-                          TileButton(
-                            color: Colors.lightGreen,
-                            title: '5',
-                          ),
-                        ],
-                      ),
-                    )
+                    AnswerKnowledgeLevelOptionBlock(
+                      selectedAnswerLevel: model.selectedAnswerLevel,
+                      options: model.answerOptions(),
+                      onOptionSelect: (value) {
+                        model.updateSelectedAnswerLevel(value: value);
+                      },
+                    ),
                   ],
                 ),
             ],

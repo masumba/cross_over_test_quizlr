@@ -4,8 +4,12 @@ class TileButton extends StatelessWidget {
   final void Function()? onPressed;
   final Color? color;
   final String title;
+  final double height;
+  final double width;
   const TileButton({
     Key? key,
+    this.width = 50,
+    this.height = 50,
     this.onPressed,
     this.color = Colors.black,
     required this.title,
@@ -17,8 +21,8 @@ class TileButton extends StatelessWidget {
       onTap: onPressed,
       child: InkWell(
         child: Container(
-          height: 50,
-          width: 50,
+          height: height,
+          width: width,
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(10),
