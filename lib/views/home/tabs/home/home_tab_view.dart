@@ -4,6 +4,7 @@ import 'package:cross_over_test_quizlr/views/home/tabs/home/tabs/following_tab.d
 import 'package:cross_over_test_quizlr/views/home/tabs/home/tabs/for_you_tab.dart';
 import 'package:cross_over_test_quizlr/widgets/app/app_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:stacked/stacked.dart';
 
@@ -17,6 +18,9 @@ class HomeTabView extends StatefulWidget {
 class _HomeTabViewState extends State<HomeTabView> {
   @override
   Widget build(BuildContext context) {
+    //TODO comeback and finish this
+    /*SystemChrome.setSystemUIOverlayStyle(
+        Theme.of(context).appBarTheme.systemOverlayStyle);*/
     return ViewModelBuilder<HomeTabViewModel>.reactive(
       disposeViewModel: false,
       onViewModelReady: (model) => model.init(),
