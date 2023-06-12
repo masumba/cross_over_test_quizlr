@@ -63,6 +63,8 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   #https://pub.dev/packages/badges
   badges: ^3.1.1
+  #https://pub.dev/packages/remove_emoji/install
+  remove_emoji: ^0.0.7
 
 dev_dependencies:
   flutter_test:
