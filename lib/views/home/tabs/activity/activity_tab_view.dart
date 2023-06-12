@@ -170,6 +170,47 @@ class _ActivityTabViewState extends State<ActivityTabView> {
                   },
                 ),
               ),
+              SizedBox(
+                height: ScreenUtil.screenHeightFraction(context, dividedBy: 3),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DefaultTabController(
+                    length: 2,
+                    child: Column(
+                      children: [
+                        // Your previous widgets...
+
+                        TabBar(
+                          indicatorColor: Theme.of(context).iconTheme.color,
+                          labelColor: Theme.of(context).iconTheme.color,
+                          labelStyle:
+                              const TextStyle(fontWeight: FontWeight.bold),
+                          tabs: [
+                            Tab(text: "Time Spent"),
+                            Tab(text: "Apps Opened"),
+                          ],
+                        ),
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              Column(
+                                children: [
+                                  // Contents for the first tab go here
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  // Contents for the second tab go here
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
