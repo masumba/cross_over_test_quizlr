@@ -1,7 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cross_over_test_quizlr/utils/screen_util.dart';
 import 'package:cross_over_test_quizlr/views/home/tabs/activity/activity_tab_view_model.dart';
+import 'package:cross_over_test_quizlr/widgets/busy_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:stacked/stacked.dart';
 
 class ActivityTabView extends StatefulWidget {
@@ -87,7 +91,83 @@ class _ActivityTabViewState extends State<ActivityTabView> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   trailing: const Icon(Icons.arrow_drop_down),
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SizedBox(
+                          height: ScreenUtil.screenHeightFraction(
+                            context,
+                            dividedBy: 2,
+                          ),
+                          child: Column(
+                            children: <Widget>[
+                              ListTile(
+                                title: AutoSizeText(
+                                  'Choose week',
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                trailing: InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Icon(Icons.close_outlined),
+                                ),
+                              ),
+                              ScreenUtil.spacedDividerSmall,
+                              Expanded(
+                                child: ListView.builder(
+                                    itemCount: 20,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      DateTime now = DateTime.now();
+                                      DateTime startOfWeek = now.subtract(
+                                          Duration(
+                                              days: now.weekday -
+                                                  1 +
+                                                  7 * (10 - index)));
+                                      DateTime endOfWeek = startOfWeek
+                                          .add(const Duration(days: 6));
+
+                                      final formatter =
+                                          DateFormat('MMM d, yyyy');
+                                      String formattedStartOfWeek =
+                                          formatter.format(startOfWeek);
+                                      String formattedEndOfWeek =
+                                          formatter.format(endOfWeek);
+
+                                      return ListTile(
+                                        title: Text(
+                                          '$formattedStartOfWeek - $formattedEndOfWeek',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        onTap: () {
+                                          print(
+                                              'Week $index selected: $formattedStartOfWeek - $formattedEndOfWeek');
+                                          Navigator.pop(context);
+                                        },
+                                      );
+                                    }),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: BusyButton(
+                                    enabledButtonColor: Colors.green,
+                                    title: 'Done',
+                                    onPressed: () {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],
