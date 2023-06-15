@@ -3,6 +3,7 @@ import 'package:cross_over_test_quizlr/utils/screen_util.dart';
 import 'package:cross_over_test_quizlr/views/home/tabs/activity/activity_tab_view_model.dart';
 import 'package:cross_over_test_quizlr/widgets/busy_button.dart';
 import 'package:cross_over_test_quizlr/widgets/charts/bar_chart_sample2.dart';
+import 'package:cross_over_test_quizlr/widgets/time_track_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -172,17 +173,21 @@ class _ActivityTabViewState extends State<ActivityTabView> {
                     },
                   ),
                 ),
-                SizedBox(
-                  height:
-                      ScreenUtil.screenHeightFraction(context, dividedBy: 1),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight:
+                        ScreenUtil.screenHeightFraction(context, dividedBy: 1),
+                    maxHeight:
+                        ScreenUtil.screenHeightFraction(context, dividedBy: 1) *
+                            1.5,
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: DefaultTabController(
                       length: 2,
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          // Your previous widgets...
-
                           TabBar(
                             indicatorColor: Theme.of(context).iconTheme.color,
                             labelColor: Theme.of(context).iconTheme.color,
@@ -202,6 +207,7 @@ class _ActivityTabViewState extends State<ActivityTabView> {
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         SizedBox(
                                           height:
@@ -211,57 +217,20 @@ class _ActivityTabViewState extends State<ActivityTabView> {
                                           ),
                                           child: BarChartSample2(),
                                         ),
-                                        const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text('Total Time Learning'),
+                                        const TimeTrackTile(
+                                          title: 'Total Time Learning',
+                                          progressPercentage: 40.0,
+                                          subText: '1h 20m',
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            width: 300,
-                                            height: 20,
-                                            child: const ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              child: LinearProgressIndicator(
-                                                value: 0.7,
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                            Color>(
-                                                        Color(0xff00ff00)),
-                                                backgroundColor:
-                                                    Color(0xffD6D6D6),
-                                              ),
-                                            ),
-                                          ),
+                                        const TimeTrackTile(
+                                          title: 'Total Time in fun Apps',
+                                          progressPercentage: 30.0,
+                                          subText: '1h 10m',
                                         ),
-                                        const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text('1h 20m'),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            width: 300,
-                                            height: 20,
-                                            child: const ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              child: LinearProgressIndicator(
-                                                value: 0.7,
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                            Color>(
-                                                        Color(0xff00ff00)),
-                                                backgroundColor:
-                                                    Color(0xffD6D6D6),
-                                              ),
-                                            ),
-                                          ),
+                                        const TimeTrackTile(
+                                          title: 'Total Allowance Remaining',
+                                          progressPercentage: 0.0,
+                                          subText: '0h 10m',
                                         ),
                                       ],
                                     ),
@@ -271,6 +240,9 @@ class _ActivityTabViewState extends State<ActivityTabView> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Card(
                                     child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         SizedBox(
                                           height:
@@ -280,57 +252,15 @@ class _ActivityTabViewState extends State<ActivityTabView> {
                                           ),
                                           child: BarChartSample2(),
                                         ),
-                                        const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text('Total Time Learning'),
+                                        const TimeTrackTile(
+                                          title: 'Opened Qiuizlr',
+                                          progressPercentage: 0,
+                                          subText: '7 times',
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 20),
-                                            width: 300,
-                                            height: 20,
-                                            child: const ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              child: LinearProgressIndicator(
-                                                value: 0.7,
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                            Color>(
-                                                        Color(0xff00ff00)),
-                                                backgroundColor:
-                                                    Color(0xffD6D6D6),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.all(8.0),
-                                          child: Text('1h 20m'),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            margin: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            width: 300,
-                                            height: 20,
-                                            child: const ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              child: LinearProgressIndicator(
-                                                value: 0.7,
-                                                valueColor:
-                                                    AlwaysStoppedAnimation<
-                                                            Color>(
-                                                        Color(0xff00ff00)),
-                                                backgroundColor:
-                                                    Color(0xffD6D6D6),
-                                              ),
-                                            ),
-                                          ),
+                                        const TimeTrackTile(
+                                          title: 'Opened Fun Apps',
+                                          progressPercentage: 0,
+                                          subText: '7 times',
                                         ),
                                       ],
                                     ),
