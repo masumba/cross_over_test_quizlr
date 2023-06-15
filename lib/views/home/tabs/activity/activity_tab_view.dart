@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cross_over_test_quizlr/utils/screen_util.dart';
 import 'package:cross_over_test_quizlr/views/home/tabs/activity/activity_tab_view_model.dart';
 import 'package:cross_over_test_quizlr/widgets/busy_button.dart';
+import 'package:cross_over_test_quizlr/widgets/charts/bar_chart_sample2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,189 +30,322 @@ class _ActivityTabViewState extends State<ActivityTabView> {
           backgroundColor: Colors.blueGrey.shade800,
           title: const Text('Activity'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListTile(
-                  tileColor: Colors.blueGrey.shade700,
-                  title: const Text(
-                    'Screen Time Management',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    tileColor: Colors.blueGrey.shade700,
+                    title: const Text(
+                      'Screen Time Management',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    subtitle: const Text(
+                      'Limit time spent in fun apps (TikTok,Games...) to be the same amount spent learning in Quizlr.',
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    trailing: CupertinoSwitch(
+                        // overrides the default green color of the track
+                        activeColor: Colors.green,
+                        // color of the round icon, which moves from right to left
+                        thumbColor: Colors.white,
+                        // when the switch is off
+                        trackColor: Colors.black12,
+                        // boolean variable value
+                        value: model.isSwitchActive,
+                        // changes the state of the switch
+                        onChanged: (value) {
+                          model.updateSwitch(result: value);
+                        }),
                   ),
-                  subtitle: const Text(
-                    'Limit time spent in fun apps (TikTok,Games...) to be the same amount spent learning in Quizlr.',
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  trailing: CupertinoSwitch(
-                      // overrides the default green color of the track
-                      activeColor: Colors.green,
-                      // color of the round icon, which moves from right to left
-                      thumbColor: Colors.white,
-                      // when the switch is off
-                      trackColor: Colors.black12,
-                      // boolean variable value
-                      value: model.isSwitchActive,
-                      // changes the state of the switch
-                      onChanged: (value) {
-                        model.updateSwitch(result: value);
-                      }),
                 ),
-              ),
-              Text(
-                '10m',
-                style: Theme.of(context).textTheme.displaySmall,
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                'This is the time that you have left for fun apps of your weekly allowance. It is calculated by subtracting the time spent in fun app (e.g. TikTok, Instagram...) from the time spent learning.',
-                textAlign: TextAlign.center,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ListTile(
-                  tileColor: Colors.blueGrey.shade700,
-                  leading: const Icon(Icons.calendar_month),
-                  title: const Text(
-                    'Week',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                Text(
+                  '10m',
+                  style: Theme.of(context).textTheme.displaySmall,
+                  textAlign: TextAlign.center,
+                ),
+                const Text(
+                  'This is the time that you have left for fun apps of your weekly allowance. It is calculated by subtracting the time spent in fun app (e.g. TikTok, Instagram...) from the time spent learning.',
+                  textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListTile(
+                    tileColor: Colors.blueGrey.shade700,
+                    leading: const Icon(Icons.calendar_month),
+                    title: const Text(
+                      'Week',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  subtitle: const Text(
-                    'Apr 24, 2023 - Apr 30,2023',
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  trailing: const Icon(Icons.arrow_drop_down),
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return SizedBox(
-                          height: ScreenUtil.screenHeightFraction(
-                            context,
-                            dividedBy: 2,
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              ListTile(
-                                title: AutoSizeText(
-                                  'Choose week',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
+                    subtitle: const Text(
+                      'Apr 24, 2023 - Apr 30,2023',
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    trailing: const Icon(Icons.arrow_drop_down),
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SizedBox(
+                            height: ScreenUtil.screenHeightFraction(
+                              context,
+                              dividedBy: 2,
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  title: const AutoSizeText(
+                                    'Choose week',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  trailing: InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Icon(Icons.close_outlined),
                                   ),
                                 ),
-                                trailing: InkWell(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Icon(Icons.close_outlined),
+                                ScreenUtil.spacedDividerSmall,
+                                Expanded(
+                                  child: ListView.builder(
+                                      itemCount: 20,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        DateTime now = DateTime.now();
+                                        DateTime startOfWeek = now.subtract(
+                                            Duration(
+                                                days: now.weekday -
+                                                    1 +
+                                                    7 * (10 - index)));
+                                        DateTime endOfWeek = startOfWeek
+                                            .add(const Duration(days: 6));
+
+                                        final formatter =
+                                            DateFormat('MMM d, yyyy');
+                                        String formattedStartOfWeek =
+                                            formatter.format(startOfWeek);
+                                        String formattedEndOfWeek =
+                                            formatter.format(endOfWeek);
+
+                                        return ListTile(
+                                          title: Text(
+                                            '$formattedStartOfWeek - $formattedEndOfWeek',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          onTap: () {
+                                            print(
+                                                'Week $index selected: $formattedStartOfWeek - $formattedEndOfWeek');
+                                            Navigator.pop(context);
+                                          },
+                                        );
+                                      }),
                                 ),
-                              ),
-                              ScreenUtil.spacedDividerSmall,
-                              Expanded(
-                                child: ListView.builder(
-                                    itemCount: 20,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      DateTime now = DateTime.now();
-                                      DateTime startOfWeek = now.subtract(
-                                          Duration(
-                                              days: now.weekday -
-                                                  1 +
-                                                  7 * (10 - index)));
-                                      DateTime endOfWeek = startOfWeek
-                                          .add(const Duration(days: 6));
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: BusyButton(
+                                      enabledButtonColor: Colors.green,
+                                      title: 'Done',
+                                      onPressed: () {},
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height:
+                      ScreenUtil.screenHeightFraction(context, dividedBy: 1),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DefaultTabController(
+                      length: 2,
+                      child: Column(
+                        children: [
+                          // Your previous widgets...
 
-                                      final formatter =
-                                          DateFormat('MMM d, yyyy');
-                                      String formattedStartOfWeek =
-                                          formatter.format(startOfWeek);
-                                      String formattedEndOfWeek =
-                                          formatter.format(endOfWeek);
-
-                                      return ListTile(
-                                        title: Text(
-                                          '$formattedStartOfWeek - $formattedEndOfWeek',
-                                          textAlign: TextAlign.center,
+                          TabBar(
+                            indicatorColor: Theme.of(context).iconTheme.color,
+                            labelColor: Theme.of(context).iconTheme.color,
+                            labelStyle:
+                                const TextStyle(fontWeight: FontWeight.bold),
+                            tabs: const [
+                              Tab(text: "Time Spent"),
+                              Tab(text: "Apps Opened"),
+                            ],
+                          ),
+                          Expanded(
+                            child: TabBarView(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Card(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height:
+                                              ScreenUtil.screenHeightFraction(
+                                            context,
+                                            dividedBy: 2,
+                                          ),
+                                          child: BarChartSample2(),
                                         ),
-                                        onTap: () {
-                                          print(
-                                              'Week $index selected: $formattedStartOfWeek - $formattedEndOfWeek');
-                                          Navigator.pop(context);
-                                        },
-                                      );
-                                    }),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: BusyButton(
-                                    enabledButtonColor: Colors.green,
-                                    title: 'Done',
-                                    onPressed: () {},
+                                        const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text('Total Time Learning'),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 20),
+                                            width: 300,
+                                            height: 20,
+                                            child: const ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              child: LinearProgressIndicator(
+                                                value: 0.7,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                            Color>(
+                                                        Color(0xff00ff00)),
+                                                backgroundColor:
+                                                    Color(0xffD6D6D6),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text('1h 20m'),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 20),
+                                            width: 300,
+                                            height: 20,
+                                            child: const ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              child: LinearProgressIndicator(
+                                                value: 0.7,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                            Color>(
+                                                        Color(0xff00ff00)),
+                                                backgroundColor:
+                                                    Color(0xffD6D6D6),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Card(
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height:
+                                              ScreenUtil.screenHeightFraction(
+                                            context,
+                                            dividedBy: 2,
+                                          ),
+                                          child: BarChartSample2(),
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text('Total Time Learning'),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 20),
+                                            width: 300,
+                                            height: 20,
+                                            child: const ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              child: LinearProgressIndicator(
+                                                value: 0.7,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                            Color>(
+                                                        Color(0xff00ff00)),
+                                                backgroundColor:
+                                                    Color(0xffD6D6D6),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text('1h 20m'),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            width: 300,
+                                            height: 20,
+                                            child: const ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              child: LinearProgressIndicator(
+                                                value: 0.7,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                            Color>(
+                                                        Color(0xff00ff00)),
+                                                backgroundColor:
+                                                    Color(0xffD6D6D6),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                height: ScreenUtil.screenHeightFraction(context, dividedBy: 3),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: DefaultTabController(
-                    length: 2,
-                    child: Column(
-                      children: [
-                        // Your previous widgets...
-
-                        TabBar(
-                          indicatorColor: Theme.of(context).iconTheme.color,
-                          labelColor: Theme.of(context).iconTheme.color,
-                          labelStyle:
-                              const TextStyle(fontWeight: FontWeight.bold),
-                          tabs: [
-                            Tab(text: "Time Spent"),
-                            Tab(text: "Apps Opened"),
-                          ],
-                        ),
-                        Expanded(
-                          child: TabBarView(
-                            children: [
-                              Column(
-                                children: [
-                                  // Contents for the first tab go here
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  // Contents for the second tab go here
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
